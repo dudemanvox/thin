@@ -1,4 +1,5 @@
 require 'etc'
+require 'fiddle'
 require 'daemons' unless Thin.win?
 
 module Process
@@ -28,6 +29,7 @@ module Thin
     attr_accessor :pid_file, :log_file
     
     def self.included(base)
+      Fiddle.dlopen('/System/Library/Frameworks/Foundation.framework/Foundation')
       base.extend ClassMethods
     end
     
